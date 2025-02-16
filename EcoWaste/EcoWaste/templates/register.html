@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoWaste - Register</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/corner-decorations.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navigation.css') }}">
+    <style>
+        :root {
+            --primary-color: #2ecc71;
+            --secondary-color: #27ae60;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+            --bg-dark: #1a1a1a;
+            --card-dark: #2d2d2d;
+            --text-light: #ffffff;
+            --text-gray: #a0aec0;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--text-light);
+            background: var(--bg-dark);
+            min-height: 100vh;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--card-dark);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-gray);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links .login-btn {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+        }
+
+        .nav-links .login-btn:hover {
+            background: var(--secondary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Register Section */
+        .register-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .register-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .register-header h1 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .register-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .tab-button {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            background: var(--card-dark);
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tab-button i {
+            font-size: 1.2rem;
+        }
+
+        .tab-button.active {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .form-container {
+            display: none;
+            background: var(--card-dark);
+            padding: 2rem;
+            border-radius: 10px;
+        }
+
+        .form-container.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--dark-color);
+            border-radius: 5px;
+            background: var(--bg-dark);
+            color: var(--text-light);
+        }
+
+        .register-button {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            background: var(--primary-color);
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .register-button:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .form-info {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .form-info h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .form-info ul {
+            list-style: none;
+        }
+
+        .form-info li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-info li i {
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- Corner Decorations -->
+    <div class="corner-decoration corner-top-left"></div>
+    <div class="corner-decoration corner-top-right"></div>
+    <div class="corner-decoration corner-bottom-left"></div>
+    <div class="corner-decoration corner-bottom-right"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="{{ url_for('home') }}" class="logo">
+                <i class="fas fa-recycle"></i>
+                EcoWaste
+            </a>
+            <div class="nav-links">
+                <a href="{{ url_for('home') }}">Home</a>
+                <a href="{{ url_for('submit_page') }}">Submit Your E-Waste</a>
+                <a href="{{ url_for('rewards_page') }}">Rewards</a>
+                <a href="{{ url_for('about_page') }}">About</a>
+                <a href="{{ url_for('login_page') }}" class="login-btn">Login</a>
+                <a href="{{ url_for('register_page') }}" class="active register-btn">Register</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Register Section -->
+    <section class="register-section">
+        <div class="register-header" data-aos="fade-up">
+            <h1>Join EcoWaste</h1>
+            <p>Choose your account type and start contributing to a sustainable future</p>
+        </div>
+
+        <div class="register-tabs" data-aos="fade-up" data-aos-delay="100">
+            <button class="tab-button active" data-tab="individual">
+                <i class="fas fa-user"></i>
+                Individual
+            </button>
+            <button class="tab-button" data-tab="retailer">
+                <i class="fas fa-store"></i>
+                Retailer
+            </button>
+            <button class="tab-button" data-tab="business">
+                <i class="fas fa-building"></i>
+                Business
+            </button>
+        </div>
+
+        <div class="register-forms" data-aos="fade-up" data-aos-delay="200">
+            <!-- Individual Form -->
+            <div class="form-container active" id="individual-form">
+                <form id="individual-register-form">
+                    <input type="hidden" name="user_type" value="individual">
+                    <div class="form-group">
+                        <label for="ind-username">Username</label>
+                        <input type="text" id="ind-username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ind-email">Email</label>
+                        <input type="email" id="ind-email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ind-password">Password</label>
+                        <input type="password" id="ind-password" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ind-fullname">Full Name</label>
+                        <input type="text" id="ind-fullname" name="full_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ind-phone">Phone Number</label>
+                        <input type="tel" id="ind-phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ind-address">Address</label>
+                        <textarea id="ind-address" name="address" required></textarea>
+                    </div>
+                    <button type="submit" class="register-button">
+                        <i class="fas fa-user-plus"></i>
+                        Register as Individual
+                    </button>
+
+                    <div class="form-info">
+                        <h4>Benefits for Individuals</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Earn rewards for recycling e-waste</li>
+                            <li><i class="fas fa-check-circle"></i> Schedule convenient pickups</li>
+                            <li><i class="fas fa-check-circle"></i> Track your environmental impact</li>
+                            <li><i class="fas fa-check-circle"></i> Access to exclusive rewards program</li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Retailer Form -->
+            <div class="form-container" id="retailer-form">
+                <form id="retailer-register-form">
+                    <input type="hidden" name="user_type" value="retailer">
+                    <div class="form-group">
+                        <label for="ret-username">Username</label>
+                        <input type="text" id="ret-username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ret-email">Email</label>
+                        <input type="email" id="ret-email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ret-password">Password</label>
+                        <input type="password" id="ret-password" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="store-name">Store Name</label>
+                        <input type="text" id="store-name" name="store_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ret-fullname">Owner's Full Name</label>
+                        <input type="text" id="ret-fullname" name="full_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ret-phone">Business Phone</label>
+                        <input type="tel" id="ret-phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ret-address">Store Address</label>
+                        <textarea id="ret-address" name="address" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="business-license">Business License Number</label>
+                        <input type="text" id="business-license" name="business_license" required>
+                    </div>
+                    <button type="submit" class="register-button">
+                        <i class="fas fa-store"></i>
+                        Register as Retailer
+                    </button>
+
+                    <div class="form-info">
+                        <h4>Benefits for Retailers</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Access to quality recycled electronics</li>
+                            <li><i class="fas fa-check-circle"></i> Competitive pricing on bulk purchases</li>
+                            <li><i class="fas fa-check-circle"></i> Real-time inventory updates</li>
+                            <li><i class="fas fa-check-circle"></i> Verified seller network</li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Business Form -->
+            <div class="form-container" id="business-form">
+                <form id="business-register-form">
+                    <input type="hidden" name="user_type" value="business">
+                    <div class="form-group">
+                        <label for="bus-username">Username</label>
+                        <input type="text" id="bus-username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bus-email">Corporate Email</label>
+                        <input type="email" id="bus-email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bus-password">Password</label>
+                        <input type="password" id="bus-password" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="company-name">Company Name</label>
+                        <input type="text" id="company-name" name="company_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="industry-type">Industry Type</label>
+                        <input type="text" id="industry-type" name="industry_type" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="employee-count">Number of Employees</label>
+                        <input type="text" id="employee-count" name="employee_count" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bus-fullname">Contact Person Name</label>
+                        <input type="text" id="bus-fullname" name="full_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bus-phone">Business Phone</label>
+                        <input type="tel" id="bus-phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bus-address">Business Address</label>
+                        <textarea id="bus-address" name="address" required></textarea>
+                    </div>
+                    <button type="submit" class="register-button">
+                        <i class="fas fa-building"></i>
+                        Register as Business
+                    </button>
+
+                    <div class="form-info">
+                        <h4>Benefits for Businesses</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Sustainable waste management solutions</li>
+                            <li><i class="fas fa-check-circle"></i> Compliance with environmental regulations</li>
+                            <li><i class="fas fa-check-circle"></i> Detailed reporting and analytics</li>
+                            <li><i class="fas fa-check-circle"></i> Bulk disposal services</li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+
+        // Tab switching function
+        function switchTab(type) {
+            // Remove active class from all containers and buttons
+            document.querySelectorAll('.form-container').forEach(container => {
+                container.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Add active class to selected container and button
+            document.getElementById(`${type}-form`).classList.add('active');
+            document.querySelector(`.tab-button[data-tab="${type}"]`).classList.add('active');
+        }
+
+        // Add click event listeners to tab buttons
+        document.querySelectorAll('.tab-button').forEach(button => {
+            button.addEventListener('click', () => {
+                switchTab(button.dataset.tab);
+            });
+        });
+
+        // Handle form submissions
+        const forms = {
+            individual: document.getElementById('individual-register-form'),
+            retailer: document.getElementById('retailer-register-form'),
+            business: document.getElementById('business-register-form')
+        };
+
+        Object.values(forms).forEach(form => {
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const formData = new FormData(form);
+                const data = {};
+                formData.forEach((value, key) => data[key] = value);
+
+                try {
+                    const response = await fetch('/api/register', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    });
+
+                    const result = await response.json();
+                    if (response.ok) {
+                        window.location.href = '/dashboard';
+                    } else {
+                        alert(result.error);
+                    }
+                } catch (error) {
+                    alert('An error occurred during registration');
+                    console.error('Registration error:', error);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
